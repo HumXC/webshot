@@ -6,5 +6,5 @@ RUN curl -fsSL https://bun.sh/install | bash
 USER chrome
 WORKDIR /app
 COPY . .
-RUN bun install
+RUN /bun/bin/bun install
 ENTRYPOINT [ "/bun/bin/bun","/app/main.ts" ]
