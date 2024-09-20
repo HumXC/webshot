@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
 import { serve, ArrayBufferSink } from "bun";
 import { configDotenv } from "dotenv";
 configDotenv();
