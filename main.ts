@@ -34,7 +34,6 @@ async function screenshot(
     quality: number | undefined,
     delay: number
 ): Promise<Uint8Array> {
-    console.log(body);
     const page = await browser.newPage();
     page.setViewport({ height, width });
     if (body === "") {
@@ -43,7 +42,14 @@ async function screenshot(
         page.setContent(body);
     }
     if (delay !== 0) await sleep(delay);
-    return await page.screenshot({ encoding: "binary", type: type, quality: quality });
+    try {
+        const image = await page.screenshot({ encoding: "binary", type: type, quality: quality });
+        page.close();
+        return image;
+    } catch (e) {
+        page.close();
+        throw e;
+    }
 }
 serve({
     port,
